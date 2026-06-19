@@ -45,7 +45,7 @@ router.post('/login', async (req, res) => {
     }
 });
 
-// for GET me
+// for get current 
 router.get('/me', protect, (req, res) => {
     const { _id, name, email, role, phone, address } = req.user;
     res.json({ _id, name, email, role, phone, address });

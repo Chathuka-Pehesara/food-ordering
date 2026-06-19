@@ -1,7 +1,7 @@
 const express = require('express');
 const multer = require('multer');
 const path = require('path');
-const { FoodItem } = require('../models/FoodItem');
+const FoodItem = require('../models/FoodItem');
 const { protect, adminOnly } = require('../middleware/auth');
 
 const router = express.Router();

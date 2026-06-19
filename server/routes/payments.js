@@ -1,7 +1,7 @@
 const express = require('express');
 const crypto = require('crypto');
-const { Order } = require('../models/Order');
-const { Payment } = require('../models/Payment');
+const Order = require('../models/Order');
+const Payment = require('../models/Payment');
 const { protect, adminOnly } = require('../middleware/auth');
 
 const router = express.Router();

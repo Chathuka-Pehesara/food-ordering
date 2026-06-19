@@ -9,15 +9,15 @@ import Register from './pages/Register';
 import Menu from './pages/Menu';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
-import MyOrders from './pages/MyOrders';
+import MyOrders from './pages/MyOrder';
 import OrderConfirmation from './pages/OrderConfirmation';
 
-import AdminLayout from './pages/admin/AdminLayout';
-import AdminDashboard from './pages/admin/AdminDashboard';
-import AdminFoods from './pages/admin/AdminFoods';
-import AdminOrders from './pages/admin/AdminOrders';
-import AdminCustomers from './pages/admin/AdminCustomers';
-import AdminPayments from './pages/admin/AdminPayments';
+import AdminLayout from './pages/Admin/AdminLayout';
+import AdminDashboard from './pages/Admin/AdminDashboard';
+import AdminFoods from './pages/Admin/AdminFoods';
+import AdminOrders from './pages/Admin/AdminOrders';
+import AdminCustomers from './pages/Admin/AdminCustomers';
+import AdminPayments from './pages/Admin/AdminPayments';
 
 const PrivateRoute = ({ children, adminRequired }) => {
   const { user, loading } = useAuth();

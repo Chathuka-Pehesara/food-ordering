@@ -3,7 +3,7 @@ import { useEffect, useState } from 'react';
 import toast from 'react-hot-toast';
 import api from '../../api/axios';
 
-export function AdminPayments() {
+export default function AdminPayments() {
     const [payments, setPayments] = useState([]);
     const [loading, setLoading] = useState(true);
 
@@ -42,7 +42,7 @@ export function AdminPayments() {
                                         <div style={{ fontSize: 12, color: '#888' }}>{p.customer?.email}</div>
                                     </td>
                                     <td style={S.td}>#{p.order?._id?.slice(-8).toUpperCase()}</td>
-                                    <td style={S.td} style={{ fontWeight: 700, color: '#10b981' }}>Rs. {p.amount.toLocaleString()}</td>
+                                    <td style={{ ...S.td, fontWeight: 700, color: '#10b981' }}>Rs. {p.amount.toLocaleString()}</td>
                                     <td style={S.td}>{p.method || 'PayHere'}</td>
                                     <td style={S.td}>
                                         <span style={{ ...S.badge, background: p.statusCode === '2' ? '#10b981' : '#f59e0b' }}>
@@ -59,8 +59,6 @@ export function AdminPayments() {
         </div>
     );
 }
-
-export default AdminOrders;
 
 const S = {
     header: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 24, flexWrap: 'wrap', gap: 12 },

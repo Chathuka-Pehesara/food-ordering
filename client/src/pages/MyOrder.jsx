@@ -72,3 +72,18 @@ export default function MyOrders() {
         </div>
     );
 }
+
+const S = {
+    page: { background: '#f9f5f0', minHeight: '100vh', padding: '32px 16px' },
+    container: { maxWidth: 760, margin: '0 auto' },
+    card: { background: '#fff', borderRadius: 14, padding: 20, marginBottom: 16, boxShadow: '0 2px 10px rgba(0,0,0,0.06)' },
+    cardHeader: { display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 12, flexWrap: 'wrap', gap: 8 },
+    orderId: { fontWeight: 700, color: '#1a1a1a', marginRight: 10 },
+    statusBadge: { display: 'inline-block', color: '#fff', fontSize: 12, fontWeight: 600, padding: '3px 10px', borderRadius: 20, marginRight: 6 },
+    items: { display: 'flex', flexWrap: 'wrap', gap: 6, marginBottom: 12 },
+    itemTag: { background: '#f5f5f5', borderRadius: 6, padding: '4px 10px', fontSize: 13, color: '#555' },
+    cardFooter: { display: 'flex', justifyContent: 'space-between', alignItems: 'center' },
+    total: { fontWeight: 700, fontSize: 17, color: '#e65c00' },
+    center: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 8 },
+    spinner: { width: 40, height: 40, border: '4px solid #f3f3f3', borderTop: '4px solid #e65c00', borderRadius: '50%', animation: 'spin 0.8s linear infinite' },
+};

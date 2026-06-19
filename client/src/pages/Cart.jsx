@@ -64,3 +64,25 @@ export default function Cart() {
         </div>
     );
 }
+
+const S = {
+    page: { background: '#f9f5f0', minHeight: '100vh', padding: '32px 16px' },
+    container: { maxWidth: 960, margin: '0 auto', display: 'grid', gridTemplateColumns: '1fr 340px', gap: 24, alignItems: 'start' },
+    left: { background: '#fff', borderRadius: 14, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.07)' },
+    item: { display: 'flex', gap: 16, alignItems: 'center', padding: '12px 0', borderBottom: '1px solid #f0f0f0' },
+    itemImg: { width: 70, height: 70, objectFit: 'cover', borderRadius: 10 },
+    qtyWrap: { display: 'flex', alignItems: 'center', gap: 8, background: '#f5f5f5', borderRadius: 8, padding: '4px 8px' },
+    qBtn: { background: 'none', border: 'none', fontSize: 18, cursor: 'pointer', color: '#e65c00', fontWeight: 700, lineHeight: 1 },
+    removeBtn: { background: 'none', border: 'none', color: '#cc0000', fontSize: 12, cursor: 'pointer' },
+    summary: { background: '#fff', borderRadius: 14, padding: 24, boxShadow: '0 2px 12px rgba(0,0,0,0.07)', position: 'sticky', top: 80 },
+    summaryRow: { display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 14 },
+    row: { display: 'flex', justifyContent: 'space-between', marginBottom: 8, fontSize: 14 },
+    checkoutBtn: { display: 'block', marginTop: 20, background: '#e65c00', color: '#fff', textDecoration: 'none', textAlign: 'center', padding: '14px', borderRadius: 10, fontWeight: 700, fontSize: 16 },
+    payBtn: { width: '100%', marginTop: 20, background: '#1a9e4a', color: '#fff', border: 'none', borderRadius: 10, padding: 14, fontWeight: 700, fontSize: 16, cursor: 'pointer' },
+    clearBtn: { background: 'none', border: '1px solid #ccc', borderRadius: 6, padding: '6px 12px', cursor: 'pointer', color: '#cc0000', fontSize: 13 },
+    empty: { display: 'flex', flexDirection: 'column', alignItems: 'center', justifyContent: 'center', minHeight: '60vh', gap: 12 },
+    shopBtn: { background: '#e65c00', color: '#fff', padding: '12px 28px', borderRadius: 10, textDecoration: 'none', fontWeight: 700, fontSize: 16 },
+    section: { marginBottom: 20 },
+    textarea: { width: '100%', padding: '10px 12px', border: '1px solid #ddd', borderRadius: 8, fontSize: 14, outline: 'none', resize: 'vertical', boxSizing: 'border-box' },
+    payInfo: { display: 'flex', gap: 10, alignItems: 'center', background: '#f0fdf4', border: '1px solid #bbf7d0', borderRadius: 8, padding: 14, marginTop: 10, color: '#166534', fontSize: 14 },
+};

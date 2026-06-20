@@ -1,11 +1,11 @@
-import { useState, useRef } from 'react';
+import { useState, useRef, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import toast from 'react-hot-toast';
 import api from '../api/axios';
 import { useCart } from '../context/CartContext';
 import { useAuth } from '../context/AuthContext';
 
-export function Checkout() {
+export default function Checkout() {
     const { cart, total, clearCart } = useCart();
     const { user } = useAuth();
     const nav = useNavigate();
@@ -16,8 +16,14 @@ export function Checkout() {
     const [loading, setLoading] = useState(false);
     const [payhereData, setPayhereData] = useState(null);
 
-    if (cart.length === 0) {
-        nav('/'); return null;
+    useEffect(() => {
+        if (cart.length === 0 && !payhereData) {
+            nav('/');
+        }
+    }, [cart.length, payhereData, nav]);
+
+    if (cart.length === 0 && !payhereData) {
+        return null;
     }
 
     const placeOrder = async () => {
@@ -108,7 +114,7 @@ export function Checkout() {
     );
 }
 
-export default Checkout;
+
 
 const S = {
     page: { background: '#f9f5f0', minHeight: '100vh', padding: '32px 16px' },

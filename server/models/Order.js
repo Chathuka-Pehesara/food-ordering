@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 const orderItemSchema = new mongoose.Schema({
-    foodItem: { type: mongoose.Schema.Types.ObjectId, ref: 'foodItem', required: true },
+    foodItem: { type: mongoose.Schema.Types.ObjectId, ref: 'FoodItem', required: true },
     name: { type: String, required: true },
     quantity: { type: Number, required: true, min: 1 },
     price: { type: Number, required: true },

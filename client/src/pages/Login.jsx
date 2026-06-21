@@ -14,6 +14,18 @@ export default function Login() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(form.email.trim())) {
+            return toast.error('Please enter a valid email address');
+        }
+
+        // Password presence check
+        if (!form.password) {
+            return toast.error('Password is required');
+        }
+
         setLoading(true);
         try {
             const { data } = await api.post('/auth/login', form);

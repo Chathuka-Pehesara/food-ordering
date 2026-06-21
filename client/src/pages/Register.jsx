@@ -8,20 +8,44 @@ import { useAuth } from '../context/AuthContext';
 export function Register() {
     const [form, setForm] = useState({ name: '', email: '', password: '', phone: '', address: '' });
     const [loading, setLoading] = useState(false);
-    const { login } = useAuth();
     const nav = useNavigate();
 
     const handleChange = e => setForm(f => ({ ...f, [e.target.name]: e.target.value }));
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        if (form.password.length < 6) return toast.error('Password must be 6+ characters');
+
+        // Name validation
+        if (!form.name.trim() || form.name.trim().length < 3) {
+            return toast.error('Full name must be at least 3 characters');
+        }
+
+        // Email validation
+        const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+        if (!emailRegex.test(form.email.trim())) {
+            return toast.error('Please enter a valid email address');
+        }
+
+        // Password validation
+        if (form.password.length < 6) {
+            return toast.error('Password must be at least 6 characters');
+        }
+
+        // Phone validation (if provided)
+        if (form.phone.trim() && !/^\+?[0-9]{9,15}$/.test(form.phone.trim())) {
+            return toast.error('Please enter a valid phone number (9-15 digits)');
+        }
+
+        // Address validation
+        if (!form.address.trim() || form.address.trim().length < 5) {
+            return toast.error('Please enter a valid delivery address (min 5 characters)');
+        }
+
         setLoading(true);
         try {
-            const { data } = await api.post('/auth/register', form);
-            login(data);
-            toast.success('Account created! Welcome 🎉');
-            nav('/');
+            await api.post('/auth/register', form);
+            toast.success('Registration successful! Please sign in.');
+            nav('/login');
         } catch (err) {
             toast.error(err.response?.data?.message || 'Registration failed');
         } finally {
@@ -38,7 +62,7 @@ export function Register() {
                     <Input label="Full Name" name="name" value={form.name} onChange={handleChange} />
                     <Input label="Email" name="email" type="email" value={form.email} onChange={handleChange} />
                     <Input label="Password" name="password" type="password" value={form.password} onChange={handleChange} />
-                    <Input label="Phone (optional)" name="phone" value={form.phone} onChange={handleChange} />
+                    <Input label="Phone (optional)" name="phone" required={false} value={form.phone} onChange={handleChange} />
                     <Input label="Address" name="address" value={form.address} onChange={handleChange} />
                     <button type="submit" style={S.btn} disabled={loading}>
                         {loading ? 'Creating...' : 'Create Account'}
@@ -52,11 +76,11 @@ export function Register() {
 
 export default Register;
 
-function Input({ label, ...props }) {
+function Input({ label, required = true, ...props }) {
     return (
         <div style={{ marginBottom: 14 }}>
             <label style={{ display: 'block', marginBottom: 4, fontSize: 14, color: '#555', fontWeight: 500 }}>{label}</label>
-            <input required style={S.input} {...props} />
+            <input required={required} style={S.input} {...props} />
         </div>
     );
 }

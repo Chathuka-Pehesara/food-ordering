@@ -63,26 +63,32 @@ router.post('/notify', async (req, res) => {
         const hashedSecret = md5(merchantSecret);
         const localHash = md5(`${merchant_id}${order_id}${payhere_amount}${payhere_currency}${status_code}${hashedSecret}`);
 
-        if (localHash !== md5sig) {
+        if (localHash.toUpperCase() !== (md5sig || '').toUpperCase()) {
             console.warn('PayHere hash mismatch');
             return res.sendStatus(400);
         }
 
         // status_code 2 = success
-        if (status_code === '2') {
-            await Order.findByIdAndUpdate(order_id, { paymentStatus: 'paid', status: 'confirmed' });
-            await Payment.create({
-                order: order_id,
-                customer: (await Order.findById(order_id)).customer,
-                payhereOrderId: payment_id || order_id,
-                amount: parseFloat(payhere_amount),
-                currency: payhere_currency,
-                statusCode: status_code,
-                statusMessage: status_message,
-                method,
-                cardNo: card_no || '',
-                paidAt: new Date(),
-            });
+        if (String(status_code) === '2') {
+            const order = await Order.findById(order_id);
+            if (order) {
+                order.paymentStatus = 'paid';
+                order.status = 'confirmed';
+                await order.save();
+
+                await Payment.create({
+                    order: order_id,
+                    customer: order.customer,
+                    payhereOrderId: payment_id || order_id,
+                    amount: parseFloat(payhere_amount),
+                    currency: payhere_currency,
+                    statusCode: status_code,
+                    statusMessage: status_message,
+                    method,
+                    cardNo: card_no || '',
+                    paidAt: new Date(),
+                });
+            }
         }
 
         res.sendStatus(200);
